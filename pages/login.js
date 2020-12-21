@@ -36,7 +36,7 @@ const Login = () => {
     setIsLoading(true);
     postLogin(email, password)
       .then((resp) => {
-        cookie.set("loginData", encryptor.encrypt(JSON.stringify(resp.data)), {
+        cookie.set("session", encryptor.encrypt(JSON.stringify(resp.data)), {
           expires: 1,
         });
         setIsLoading(false);
