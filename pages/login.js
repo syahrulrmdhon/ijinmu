@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import cookies from "next-cookies";
+import { useRouter } from "next/router";
+import cookie from "js-cookie";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Layout from "../components/Layouts";
 import { postLogin } from "../utils/apiData";
+import StaticData from "../utils/staticData";
+var encryptor = require("simple-encryptor")(StaticData.API_CRYPT);
 
 const LoginContainer = styled.div`
   display: flex;
@@ -27,14 +30,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = () => {
     setIsLoading(true);
     postLogin(email, password)
       .then((resp) => {
-        console.log(resp.data);
-        document.cookie = `attributes=${resp.data.attributes}; token = ${resp.data.attributes.token}`;
+        cookie.set("loginData", encryptor.encrypt(JSON.stringify(resp.data)), {
+          expires: 1,
+        });
         setIsLoading(false);
+        router.push("/");
       })
       .catch((err) => {
         const { response } = err;
@@ -42,6 +48,10 @@ const Login = () => {
         setIsLoading(false);
       });
   };
+
+  // example how to decrypt cookie
+  // let dataCookies = cookie.get("loginData")
+  // dataCookies = JSON.parse(encryptor.decrypt(dataCookies));
 
   return (
     <Layout>

@@ -10,10 +10,12 @@
   "dependencies": {
     "antd": "^4.9.4",
     "axios": "^0.21.0",
+    "js-cookie": "^2.2.1",
     "next": "10.0.3",
     "next-cookies": "^2.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "simple-encryptor": "^4.0.0",
     "styled-components": "^5.2.1"
   },
   "resolutions": {
