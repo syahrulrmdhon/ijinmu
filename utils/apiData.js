@@ -10,7 +10,7 @@ if (process.env.NEXT_PUBLIC_ENVIRONMENT === "development") {
 export { postLogin, getCompanyDetail };
 
 const getToken = function () {
-  let isToken = localStorage.getItem("attributes");
+  let isToken = '12';
   return isToken;
 };
 

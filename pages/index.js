@@ -12,9 +12,9 @@ function Home() {
 
 Home.getInitialProps = async (ctx) => {
   let dataCookie;
-  const { attribute } = cookies(ctx);
-  if (attribute) {
-    dataCookie = attribute;
+  const { attributes } = cookies(ctx);
+  if (attributes) {
+    dataCookie = attributes;
   } else {
     if (ctx.res) {
       ctx.res.writeHead(302, { Location: '/login' });
